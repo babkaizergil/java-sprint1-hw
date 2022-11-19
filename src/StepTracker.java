@@ -64,6 +64,7 @@ public class StepTracker {
             double kcal = Converter.getKcal(sumData());
             return kcal;
         }
+
         int bestSeries() {
             int days = 0;
             int count = 0;
@@ -72,11 +73,14 @@ public class StepTracker {
                     days++;                             //счет если да
                 }
                 else {                                  //если нет
-                    if(days > count) {
+                    if(count < days) {
                         count = days;                   //сохраняем набранные дни
-                        days = 0;                      //сброс счетчика и поиск далее по массиву
                     }
+                    days = 0;
                 }
+            }
+            if(count < days) {
+                count = days;
             }
             return count;
         }
